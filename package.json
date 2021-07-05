@@ -1,0 +1,16 @@
+{
+  "name": "it122",
+  "version": "1.0.0",
+  "description": "Application for IT122",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "respository": {
+    "type": "git",
+    "url": "git+https://github.com/heosman/it122.git"
+  },
+  "author": "Hanan Osman",
+  "license": "ISC"
+}
