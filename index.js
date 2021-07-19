@@ -1,23 +1,24 @@
 console.log('HW 2')
 
 import http from 'http';
-import { parse } from 'querystring';
 import { getAll, getItem } from './data.js';
+import { parse } from "querystring";
 
 
 // To start the web server
 http.createServer((req,res) => {
-    var path = req.url.toString();
-    let url = req.url.split("?");
+    let url = req.url.split("?"); 
     let query = parse(url[1]);
-    switch(path) {
+    let path = req.url.toLowerCase();
+    console.log(path);
+    switch(url[0]) {
         case '/':
             res.writeHead(200, {'Content-Type': 'text/plain'});
             res.end(JSON.stringify(getAll));
             break;
         case '/detail':
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getItem("green grapes")));
+            res.end(JSON.stringify(getItem));
             break; 
         case '/about':
             res.writeHead(200, {'Content-Type': 'text/plain'});
