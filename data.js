@@ -17,7 +17,7 @@ const getAll = () => {
 
 const getItem = (fruitname) => {
     return fruits.find((fruit) => {
-        return fruit.fruitname == fruitame;
+        return fruit.fruitname == fruitname;
 });
 };
 
