@@ -13,7 +13,7 @@ http.createServer((req,res) => {
     switch(url[0]) {
         case '/':
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getAll));
+            res.end(JSON.stringify(getAll()));
             break;
         case '/detail':
             console.log(query);

@@ -1,4 +1,3 @@
-
 let fruits = [
     { fruitname : "grapes", price : 4.39, quantity : 2, unit : "lbs" },
     { fruitname : "apples", price : 1.00, quantity : 6, unit : "each" },
