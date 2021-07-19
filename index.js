@@ -4,21 +4,23 @@ import http from 'http';
 import { getAll, getItem } from './data.js';
 import { parse } from "querystring";
 
-
 // To start the web server
 http.createServer((req,res) => {
     let url = req.url.split("?"); 
     let query = parse(url[1]);
-    let path = req.url.toLowerCase();
+    var path = req.url.toLowerCase();
     console.log(path);
     switch(url[0]) {
         case '/':
+            let allFruits = getAll();
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getAll));
+            res.end(JSON.stringify(allFruits));
             break;
         case '/detail':
+            console.log(query);
+            let getFruit = getItem(query.fruitname);
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getItem));
+            res.end(JSON.stringify(getFruit));
             break; 
         case '/about':
             res.writeHead(200, {'Content-Type': 'text/plain'});

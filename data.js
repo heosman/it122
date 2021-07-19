@@ -1,19 +1,23 @@
 
-export let fruits = [
-    { fruitName : "green grapes", price : 4.39, quantity : 2, unit : "lbs" },
-    { fruitName : "gala apples", price : 1.00, quantity : 6, unit : "each" },
-    { fruitName : "navel oranges", price : 1.58, quantity : 1, unit : "lbs" },
-    { fruitName : "red cherries", price : 2.29, quantity : 2, unit : "lbs" },
-    { fruitName : "pears", price : 1.58, quantity : 1, unit : "lbs" }
+let fruits = [
+    { fruitname : "grapes", price : 4.39, quantity : 2, unit : "lbs" },
+    { fruitname : "apples", price : 1.00, quantity : 6, unit : "each" },
+    { fruitname : "noranges", price : 1.58, quantity : 1, unit : "lbs" },
+    { fruitname : "cherries", price : 2.29, quantity : 2, unit : "lbs" },
+    { fruitname : "pears", price : 1.58, quantity : 1, unit : "lbs" }
     ];
 
-let getAll = fruits.filter((fruit) => {
+/* let getAll = fruits.filter((fruit) => {
     return('Name: ' + fruit.fruitName + ' - Price: ' + fruit.price + ' - Quantity: ' + fruit.quantity + ' - Unit: ' + fruit.unit);
-});
+}); */
 
-const getItem = (nameFruit) => {
-    return fruits.find((fruitName) => {
-        return fruitName.fruitName == nameFruit;
+const getAll = () => {
+    return fruits;
+}
+
+const getItem = (fruitname) => {
+    return fruits.find((fruit) => {
+        return fruit.fruitname == fruitame;
 });
 };
 
