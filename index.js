@@ -12,15 +12,13 @@ http.createServer((req,res) => {
     console.log(path);
     switch(url[0]) {
         case '/':
-            let allFruits = getAll();
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(allFruits));
+            res.end(JSON.stringify(getAll));
             break;
         case '/detail':
             console.log(query);
-            let getFruit = getItem(query.fruitname);
             res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getFruit));
+            res.end(JSON.stringify(getItem(query.fruitname)));
             break; 
         case '/about':
             res.writeHead(200, {'Content-Type': 'text/plain'});

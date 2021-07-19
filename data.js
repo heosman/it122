@@ -9,7 +9,7 @@ let fruits = [
 
 /* let getAll = fruits.filter((fruit) => {
     return('Name: ' + fruit.fruitName + ' - Price: ' + fruit.price + ' - Quantity: ' + fruit.quantity + ' - Unit: ' + fruit.unit);
-}); */
+});  */
 
 const getAll = () => {
     return fruits;
