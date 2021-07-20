@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <br><h2>Home</h2>
+    <hr>
+    <br><h3>Fruits</h3>
+    {{#each fruits}}
+        <li class="fruits"><a href="/detail?fruitname={{fruitname}}">{{fruitname}}</a></li>
+    {{/each}}
+</body>
+</html>

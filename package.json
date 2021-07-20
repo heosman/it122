@@ -12,5 +12,11 @@
     "url": "git+https://github.com/heosman/it122.git"
   },
   "author": "Hanan Osman",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "handlebars": "^4.7.7",
+    "nodemon": "^2.0.12"
+  }
 }

@@ -1,32 +1,54 @@
-console.log('HW 2')
+console.log('HW 3')
 
-import http from 'http';
-import { getAll, getItem } from './data.js';
-import { parse } from "querystring";
+"use strict"
+import * as fruit from "./data.js";
+import express from 'express';
+import handlebars from "express-handlebars"
 
-// To start the web server
-http.createServer((req,res) => {
-    let url = req.url.split("?"); 
-    let query = parse(url[1]);
-    var path = req.url.toLowerCase();
-    console.log(path);
-    switch(url[0]) {
-        case '/':
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getAll()));
-            break;
-        case '/detail':
-            console.log(query);
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(JSON.stringify(getItem(query.fruitname)));
-            break; 
-        case '/about':
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end('About page \r\n \r\n My name is Hanan Osman. I am currently in the Web Development program at Seattle Central.');
-            break;
-        default:
-            res.writeHead(404, {'Content-Type': 'text/plain'});
-            res.end('Not found');
-            break;
-    }
-}).listen(process.env.PORT || 3000);
+const app = express();
+app.set("port", process.env.PORT || 3000);
+app.use(express.static('./public')); 
+app.use(express.urlencoded());
+app.use(express.json());
+
+app.engine('hbs', handlebars({defaultLayout: false}));
+app.set("view engine", "hbs");
+
+// GET requests
+app.get('/', (req,res) => {
+    res.render('home', {fruits: fruit.getAll()});
+});
+
+app.get('/about', (req,res) => {
+    res.type('text/plain');
+    res.send('About page \r\n \r\n My name is Hanan Osman. I am currently in the Web Development program at Seattle Central.');
+   });
+
+app.get('/detail', (req,res) => {
+    console.log(req.query)
+    let result = fruit.getItem(req.query.fruitname);
+    res.render("details", {
+        fruitname: req.query.fruitname, 
+        result
+        }
+    );
+});
+
+// handle POST
+app.post('/detail', (req,res) => {
+    console.log(req.body)
+    let found = fruit.getItem(req.body.fruitname);
+    res.render("details", {fruitname: req.body.fruitname, result: found, fruits: fruit.getAll()});
+});
+
+// 404 handler
+app.use((req,res) => {
+    res.type('text/plain'); 
+    res.status(404);
+    res.send('404 - Not found');
+});
+
+// to start server
+app.listen(app.get('port'), () => {
+    console.log('Express started');    
+});

@@ -1,0 +1,52 @@
+html {
+    background: #EBE5FF;
+}
+
+body {
+    font-family: lucida console;
+    margin: 0 auto;
+    width: 50%;
+    padding: 20px;
+    border-radius: 16px;
+    background: #E7E0FF;
+
+}
+
+hr {
+    border: 1px solid #CAC3E5;
+    border-radius: 2px;
+  }
+
+h2 {
+    text-align: center;
+    color: #32303D;
+}
+
+h3 {
+    color: #32303D;
+}
+
+.homebutton {
+    font-size: 20px;
+    text-align: center;
+    padding-top: 200px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+}
+
+li {
+    background: #E1D8FF;
+    color: #32303D;
+    padding: 5px;
+    list-style-type: none;
+    font-size: 15px;
+    border-radius: 6px;
+}
+
+.fruits {
+    padding: 12px;
+}
+

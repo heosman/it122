@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Details</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <br><br><a href="/" class="homebutton">&#8592; Home</a>
+    <hr>
+    {{#if result}}
+        <br><h3>Details about {{fruitname}}</h3>
+        <li>Price: &#36;{{result.price}}</li>
+        <li>Quantity: {{result.quantity}}</li>
+        <li>Unit: {{result.unit}}</li>
+    {{else}}
+        <h2>{{fruitname}} not found</h2>
+    {{/if}}
+</body>
+</html>
