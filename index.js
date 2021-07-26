@@ -1,9 +1,9 @@
-console.log('HW 3')
+console.log('HW 4')
 
 "use strict"
-import * as fruit from "./data.js";
 import express from 'express';
 import handlebars from "express-handlebars"
+import { Fruit } from "./fruit.js";
 
 const app = express();
 app.set("port", process.env.PORT || 3000);
@@ -16,7 +16,11 @@ app.set("view engine", "hbs");
 
 // GET requests
 app.get('/', (req,res) => {
-    res.render('home', {fruits: fruit.getAll()});
+    Fruit.find({}).lean()
+        .then((fruits) => {
+            res.render('home', { fruits });
+        })
+        .catch(err => next(err));
 });
 
 app.get('/about', (req,res) => {
@@ -24,21 +28,21 @@ app.get('/about', (req,res) => {
     res.send('About page \r\n \r\n My name is Hanan Osman. I am currently in the Web Development program at Seattle Central.');
    });
 
-app.get('/detail', (req,res) => {
-    console.log(req.query)
-    let result = fruit.getItem(req.query.fruitname);
-    res.render("details", {
-        fruitname: req.query.fruitname, 
-        result
-        }
-    );
+app.get('/detail', (req,res,next) => {
+    Fruit.findOne({ fruitname:req.query.fruitname }).lean()
+        .then((fruit) => {
+            res.render('details', {result: fruit} );
+        })
+        .catch(err => next(err));
 });
 
 // handle POST
-app.post('/detail', (req,res) => {
-    console.log(req.body)
-    let found = fruit.getItem(req.body.fruitname);
-    res.render("details", {fruitname: req.body.fruitname, result: found, fruits: fruit.getAll()});
+app.post('/detail', (req,res, next) => {
+    Fruit.findOne({ fruitname:req.body.fruitname }).lean()
+        .then((fruit) => {
+            res.render('details', {result: fruit} );
+        })
+        .catch(err => next(err));
 });
 
 // 404 handler
