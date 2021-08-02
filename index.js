@@ -50,6 +50,7 @@ app.post('/detail', (req,res, next) => {
 });
 
 
+
 // API routes
 
 app.get('/api/fruits', (req,res) => {
