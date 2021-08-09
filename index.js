@@ -1,4 +1,4 @@
-console.log('HW 5')
+console.log('HW 6')
 
 "use strict"
 import express from 'express';
@@ -20,15 +20,15 @@ app.set("view engine", "hbs");
 
 // GET requests
 
-app.get('/', (req,res) => {
+app.get('/', (req,res, next) => {
     Fruit.find({}).lean()
         .then((fruits) => {
-            res.render('home', { fruits });
+            res.render('home', {fruits: JSON.stringify(fruits)});
         })
         .catch(err => next(err));
 });
 
-app.get('/about', (req,res) => {
+app.get('/about', (req,res, next) => {
     res.type('text/plain');
     res.send('About page \r\n \r\n My name is Hanan Osman. I am currently in the Web Development program at Seattle Central.');
    });

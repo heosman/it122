@@ -2,13 +2,42 @@
 <head>
     <title>Home</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
+
 <body>
     <br><h2>Home</h2>
     <hr>
     <br><h3>Fruits</h3>
-    {{#each fruits}}
-        <li class="fruits"><a href="/detail?fruitname={{fruitname}}">{{fruitname}}</a></li>
-    {{/each}}
+
+<div id="root"></div>
+<script type="text/babel">
+
+    const fruits = {{{fruits}}}
+
+    // click event handler
+    const showDetail = (event) => {
+        console.log(event.target)
+        console.log(event.target.innerText)
+        console.log(event.target.id)
+        window.location.href = "/detail?fruitname=" + event.target.innerText;
+    }
+
+    const FruitList = (props) => {
+        const listItems = props.data.map((fruit) =>
+        <li key={fruit._id} id={fruit._id} onClick={props.clickHandler}>
+            {fruit.fruitname}
+        </li>);
+        return <ul>{listItems}</ul>
+        }
+
+    ReactDOM.render(
+        <div><FruitList data={fruits} clickHandler={showDetail}/></div>, 
+        document.getElementById('root'));
+</script>
 </body>
 </html>
