@@ -37,6 +37,12 @@ a {
     font-size: 16px;
 }
 
+p {
+    font-size: 12px;
+    text-align: center;
+    padding: 1em;
+}
+
 li {
     background: #E1D8FF;
     color: #32303D;
@@ -50,3 +56,13 @@ li {
     padding: 12px;
 }
 
+button {
+    padding: 5px;
+    color: #32303D;
+    background-color: #E1D8FF;
+    border-radius: 8px;
+}
+
+.details {
+    padding: 2em;
+}

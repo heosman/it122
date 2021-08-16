@@ -73,29 +73,11 @@ app.get('/api/fruits/detail', (req,res,next) => {
         .catch(err => next(err));
 });
 
-app.post('/api/fruits/detail', (req,res, next) => {
-    Fruit.findOne({ fruitname:req.query.fruitname }).lean()
-        .then((fruit) => {
-            res.json(fruit);
-        })
-        .catch(err => next(err));
-});
-
 app.get('/api/fruits/delete/:id', (req,res) => {
     Fruit.deleteOne({"_id":req.params.id }, (err, result) => {
         if (err) return next(err);
         // return # of items deleted
         return res.json({"deleted": result});
-    });
-});
-
-app.get('/api/fruits/add/:fruitname/:price/:quantity/:unit', (req,res, next) => {
-    // find & update existing item, or add new 
-    let fruitname = req.params.fruitname;
-    Fruit.updateOne({ fruitname: fruitname}, {fruitname:fruitname, price: req.params.price, quantity: req.params.quantity, unit: req.params.unit }, {upsert: true }, (err, result) => {
-        if (err) return next(err);
-        // nModified = 0 for new item, = 1+ for updated item 
-        res.json({updated: result.nModified});
     });
 });
 

@@ -17,15 +17,7 @@
 <div id="root"></div>
 <script type="text/babel">
 
-    const fruits = {{{fruits}}}
-
-    // click event handler
-    const showDetail = (event) => {
-        console.log(event.target)
-        console.log(event.target.innerText)
-        console.log(event.target.id)
-        window.location.href = "/detail?fruitname=" + event.target.innerText;
-    }
+  //  const fruits = {{{fruits}}}
 
     const FruitList = (props) => {
         const listItems = props.data.map((fruit) =>
@@ -35,9 +27,57 @@
         return <ul>{listItems}</ul>
         }
 
-    ReactDOM.render(
-        <div><FruitList data={fruits} clickHandler={showDetail}/></div>, 
-        document.getElementById('root'));
+    const ItemDetails = (props) => {
+            return <div class="details">
+                <hr /><br />
+                <h3>Fruit Details</h3>
+                {props.item.fruitname && <ul>
+                    <li>fruitname: {props.item.fruitname}</li>
+                    <li>price: {props.item.price}</li>
+                    <li>quantity: {props.item.quantity}</li>
+                    <li>unit: {props.item.unit}</li>
+                </ul>
+                }
+                <br /><button onClick={props.reset}>Clear</button><br /><br /><hr />
+            </div>
+        }
+
+    class FruitApp extends React.Component{
+      constructor(props){
+          super(props);
+          this.state = {
+            items: {{{ fruits }}},
+            currentItem: { }
+          };
+          this.selectItem = this.selectItem.bind(this);
+          this.onClear = this.onClear.bind(this);
+       }
+
+        selectItem = (event) => {
+            console.log(event.target)
+            console.log(event.target.innerText)
+            console.log(event.target.id)
+            const found = this.state.items.find((item) => {
+                return item.fruitname === event.target.innerText;
+            });
+            this.setState({currentItem: found})
+        //   window.location.href = "/detail?fruitname=" + event.target.innerText;
+        }
+
+        onClear() {
+        this.setState({currentItem: {}});
+      }
+
+      render() {
+        return (
+          <div><FruitList data={this.state.items} clickHandler={this.selectItem}/>
+          <ItemDetails item={this.state.currentItem} reset={this.onClear}/>
+          </div>
+          );
+      }
+    }
+
+    ReactDOM.render(<FruitApp />, document.getElementById('root'));
 </script>
 </body>
 </html>
